@@ -1,0 +1,45 @@
+---
+// src/components/DesignCard.astro
+import VoteButton from "./VoteButton.jsx";
+
+interface Props {
+  id: string;
+  title: string;
+  description?: string;
+  imageUrl: string;
+  votes: number;
+}
+
+const { id, title, description, imageUrl, votes } = Astro.props;
+---
+
+<div
+  class="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-xl"
+>
+  <div class="aspect-square bg-gray-200">
+    <img src={imageUrl} alt={title} class="h-full w-full object-cover" />
+  </div>
+
+  <div class="p-4">
+    <h3 class="mb-2 text-xl font-semibold text-gray-900">
+      {title}
+    </h3>
+
+    {
+      description && (
+        <p class="mb-4 line-clamp-2 text-sm text-gray-600">{description}</p>
+      )
+    }
+
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl font-bold text-indigo-600">
+          {votes}
+        </span>
+        <span class="text-sm text-gray-500">votes</span>
+      </div>
+
+      <VoteButton client:load designId={id} initialVotes={votes} />
+    </div>
+  </div>
+</div>

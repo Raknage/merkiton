@@ -1,0 +1,55 @@
+---
+// src/layouts/Layout.astro
+import "../styles/global.css";
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Vote for your favorite patch designs" } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Patch Voting</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <nav class="bg-white shadow-sm">
+      <div class="mx-auto max-w-7xl px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-indigo-600"> PatchVote </a>
+          <div class="space-x-6">
+            <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+            <a href="/gallery" class="text-gray-700 hover:text-indigo-600"
+              >Gallery</a
+            >
+            <a href="/leaderboard" class="text-gray-700 hover:text-indigo-600"
+              >Leaderboard</a
+            >
+            <a
+              href="/submit"
+              class="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+            >
+              Submit Design
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-20 border-t bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-8 text-center text-gray-600">
+        <p>Made with ❤️ for Low Code/No Code Course</p>
+      </div>
+    </footer>
+  </body>
+</html>

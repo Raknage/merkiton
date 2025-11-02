@@ -1,0 +1,13 @@
+{
+  // --- Automatic Formatting on Save ---
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // --- Automatic Linting and Fixing on Save ---
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // --- Tell VS Code what files ESLint should check ---
+  "eslint.validate": ["javascript", "javascriptreact", "astro"],
+  // --- Ensure the project's Prettier is used ---
+  "prettier.prettierPath": "./node_modules/prettier/index.mjs"
+}

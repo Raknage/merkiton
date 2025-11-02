@@ -1,0 +1,30 @@
+---
+// src/pages/submit.astro
+import Layout from "../layouts/Layout.astro";
+import SubmitForm from "../components/SubmitForm.jsx";
+---
+
+<Layout title="Submit Design">
+  <div class="mx-auto max-w-3xl px-4 py-12">
+    <div class="mb-12 text-center">
+      <h1 class="mb-4 text-4xl font-bold text-gray-900">Submit Your Design</h1>
+      <p class="text-xl text-gray-600">
+        Share your patch design with the community
+      </p>
+    </div>
+
+    <div class="rounded-lg bg-white p-8 shadow-md">
+      <SubmitForm client:load />
+    </div>
+
+    <div class="mt-8 rounded border-l-4 border-blue-500 bg-blue-50 p-6">
+      <h3 class="mb-2 font-semibold text-blue-900">📋 Submission Guidelines</h3>
+      <ul class="space-y-2 text-blue-800">
+        <li>• Design should be original or properly attributed</li>
+        <li>• Images should be clear and high quality</li>
+        <li>• Keep titles descriptive and concise</li>
+        <li>• Be respectful and creative!</li>
+      </ul>
+    </div>
+  </div>
+</Layout>

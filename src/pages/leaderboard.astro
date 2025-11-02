@@ -1,0 +1,76 @@
+---
+// src/pages/leaderboard.astro
+import Layout from "../layouts/Layout.astro";
+import { getTopDesigns } from "../lib/firestore";
+
+const topDesigns = await getTopDesigns(10);
+---
+
+<Layout title="Leaderboard">
+  <div class="mx-auto max-w-5xl px-4 py-12">
+    <div class="mb-12 text-center">
+      <h1 class="mb-4 text-4xl font-bold text-gray-900">🏆 Top Designs</h1>
+      <p class="text-xl text-gray-600">
+        The most popular patch designs voted by the community
+      </p>
+    </div>
+
+    {
+      topDesigns.length === 0 ? (
+        <div class="py-20 text-center">
+          <p class="text-2xl text-gray-400">No designs yet</p>
+        </div>
+      ) : (
+        <div class="space-y-4">
+          {topDesigns.map((design, index) => (
+            <div class="flex items-center gap-6 rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
+              {/* Rank Badge */}
+              <div class="shrink-0">
+                <div
+                  class={`flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold ${index === 0 ? "bg-yellow-400 text-yellow-900" : ""} ${index === 1 ? "bg-gray-300 text-gray-700" : ""} ${index === 2 ? "bg-orange-400 text-orange-900" : ""} ${index > 2 ? "bg-indigo-100 text-indigo-700" : ""} `}
+                >
+                  {index === 0
+                    ? "🥇"
+                    : index === 1
+                      ? "🥈"
+                      : index === 2
+                        ? "🥉"
+                        : `#${index + 1}`}
+                </div>
+              </div>
+
+              {/* Image */}
+              <div class="h-24 w-24 shrink-0">
+                <img
+                  src={design.imageUrl}
+                  alt={design.title}
+                  class="h-full w-full rounded-lg object-cover"
+                />
+              </div>
+
+              {/* Info */}
+              <div class="grow">
+                <h3 class="mb-1 text-xl font-semibold text-gray-900">
+                  {design.title}
+                </h3>
+                {design.description && (
+                  <p class="line-clamp-2 text-sm text-gray-600">
+                    {design.description}
+                  </p>
+                )}
+              </div>
+
+              {/* Votes */}
+              <div class="shrink-0 text-right">
+                <div class="text-3xl font-bold text-indigo-600">
+                  {design.votes}
+                </div>
+                <div class="text-sm text-gray-500">votes</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Layout>

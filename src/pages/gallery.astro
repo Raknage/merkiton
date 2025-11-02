@@ -1,0 +1,49 @@
+---
+// src/pages/gallery.astro
+import Layout from "../layouts/Layout.astro";
+import DesignCard from "../components/DesignCard.astro";
+import { getAllDesigns } from "../lib/firestore.ts";
+import type { Design } from "../types";
+
+// Fetch designs at build time
+const designs: Design[] = await getAllDesigns();
+---
+
+<Layout title="Gallery">
+  <div class="mx-auto max-w-7xl px-4 py-12">
+    <div class="mb-12 text-center">
+      <h1 class="mb-4 text-4xl font-bold text-gray-900">
+        Patch Design Gallery
+      </h1>
+      <p class="text-xl text-gray-600">
+        Browse all submitted designs and vote for your favorites
+      </p>
+    </div>
+
+    {
+      designs.length === 0 ? (
+        <div class="py-20 text-center">
+          <p class="mb-6 text-2xl text-gray-400">No designs yet</p>
+          <a
+            href="/submit"
+            class="inline-block rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700"
+          >
+            Be the first to submit!
+          </a>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {designs.map((design) => (
+            <DesignCard
+              id={design.id}
+              title={design.title}
+              description={design.description}
+              imageUrl={design.imageUrl}
+              votes={design.votes}
+            />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Layout>
