@@ -4,6 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import DesignCard from "../components/DesignCard.astro";
 import { getTopDesigns } from "../lib/firestore";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 // Get top 3 designs for preview
 const featuredDesigns = await getTopDesigns(3);
 ---
@@ -20,13 +22,13 @@ const featuredDesigns = await getTopDesigns(3);
       </p>
       <div class="flex justify-center gap-4">
         <a
-          href="/submit"
+          href={`${baseUrl}/submit`}
           class="rounded-lg bg-white px-8 py-4 text-lg font-semibold text-indigo-600 transition-colors hover:bg-gray-100"
         >
           Submit Design
         </a>
         <a
-          href="/gallery"
+          href={`${baseUrl}/gallery`}
           class="rounded-lg bg-indigo-500 px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-indigo-400"
         >
           Browse Gallery
@@ -82,7 +84,7 @@ const featuredDesigns = await getTopDesigns(3);
           </div>
           <div class="mt-8 text-center">
             <a
-              href="/leaderboard"
+              href={`${baseUrl}/leaderboard`}
               class="font-semibold text-indigo-600 hover:text-indigo-700"
             >
               View Full Leaderboard →

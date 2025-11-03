@@ -5,6 +5,8 @@ import DesignCard from "../components/DesignCard.astro";
 import { getAllDesigns } from "../lib/firestore.ts";
 import type { Design } from "../types";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 // Fetch designs at build time
 const designs: Design[] = await getAllDesigns();
 ---
@@ -25,7 +27,7 @@ const designs: Design[] = await getAllDesigns();
         <div class="py-20 text-center">
           <p class="mb-6 text-2xl text-gray-400">No designs yet</p>
           <a
-            href="/submit"
+            href={`${baseUrl}/submit`}
             class="inline-block rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700"
           >
             Be the first to submit!
