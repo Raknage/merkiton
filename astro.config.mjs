@@ -8,10 +8,10 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://raknage.github.io",
+  base: "/merkiton",
+  trailingSlash: "never",
   vite: {
     plugins: [tailwindcss()],
   },
-
   integrations: [react()],
-  base: '/merkiton',
 });
