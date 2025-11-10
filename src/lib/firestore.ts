@@ -23,7 +23,7 @@ export async function getAllDesigns(): Promise<Design[]> {
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...(doc.data() as Omit<Design, 'id'>),
+    ...(doc.data() as Omit<Design, "id">),
   }));
 }
 
@@ -35,12 +35,14 @@ export async function getTopDesigns(limitCount = 10): Promise<Design[]> {
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...(doc.data() as Omit<Design, 'id'>),
+    ...(doc.data() as Omit<Design, "id">),
   }));
 }
 
 // Submit a new design
-export async function submitDesign(designData: Omit<Design, 'id' | 'votes' | 'createdAt'>): Promise<string> {
+export async function submitDesign(
+  designData: Omit<Design, "id" | "votes" | "createdAt">
+): Promise<string> {
   const designsRef = collection(db, "designs");
   const docRef = await addDoc(designsRef, {
     ...designData,
@@ -52,7 +54,10 @@ export async function submitDesign(designData: Omit<Design, 'id' | 'votes' | 'cr
 }
 
 // Vote on a design
-export async function voteOnDesign(designId: string, userId: string): Promise<void> {
+export async function voteOnDesign(
+  designId: string,
+  userId: string
+): Promise<void> {
   // Check if user already voted
   const votesRef = collection(db, "votes");
   const q = query(
@@ -81,7 +86,10 @@ export async function voteOnDesign(designId: string, userId: string): Promise<vo
 }
 
 // Check if user has voted
-export async function hasUserVoted(designId: string, userId: string): Promise<boolean> {
+export async function hasUserVoted(
+  designId: string,
+  userId: string
+): Promise<boolean> {
   const votesRef = collection(db, "votes");
   const q = query(
     votesRef,
